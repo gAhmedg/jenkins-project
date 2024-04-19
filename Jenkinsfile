@@ -3,7 +3,7 @@
 pipeline {
 
 environment { 
-        imageName = algn48/nti-app
+        imageName = 'algn48/nti-app'
     }
 
     agent any
