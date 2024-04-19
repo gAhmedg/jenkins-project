@@ -1,21 +1,13 @@
+@Library('shared-library') _
+
 pipeline {
     agent any
-
-    stages {    
-
-  
-          stage('dockerBuildAndPush')
-          {
+    stages {
+        stage('Build and Push Docker Image') {
             steps {
-                script {
-                    oldDockerBuildAndPush.call (imageName: "algn48/new-app-nti" )
-
-                }
-
-            	 
-                   }
-
-          }
-}   
+                
+                oldDockerBuildAndPush(imageName: 'algn48/nti-app')
+            }
+        }
+    }
 }
-
