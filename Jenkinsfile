@@ -1,9 +1,10 @@
+// @library("Shared-library") _
 pipeline {
     agent any
 
    
 environment {
-    IMAGE_NAME      = 'algn48/new-app-nti' 
+    IMAGE      = 'algn48/new-app-nti' 
 }
   // stage1
     stages {    
@@ -20,7 +21,7 @@ environment {
           stage('dockerBuildAndPush')
           {
             steps {
-            dockerBuildAndPush( imageName: "${IMAGE_NAME}")
+            dockerBuildAndPush( imageName: "${IMAGE}")
                   }
             
           }
@@ -30,26 +31,3 @@ environment {
 } 
 
 
-//###############################################################33
-/*pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
-}
-*/
