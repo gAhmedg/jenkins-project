@@ -6,14 +6,17 @@ pipeline {
 environment {
     IMAGE      = 'algn48/new-app-nti' 
 }
-  // stage1
+  
     stages {    
-        stage('Verify Branch') {
-            steps {
-                echo "$GIT_BRANCH"
-            }
+
+
+// stage1 
+        // stage('Verify Branch') {
+        //     steps {
+        //         echo "$GIT_BRANCH"
+        //     }
            
-        }
+        // }
 
 
 // stage2
