@@ -7,8 +7,11 @@ pipeline {
           stage('dockerBuildAndPush')
           {
             steps {
+                script {
+                               oldDockerBuildAndPush (imageName: "algn48/new-app-nti" )
 
-           oldDockerBuildAndPush (imageName: "algn48/new-app-nti" )
+                }
+
             	 
                    }
 
