@@ -14,68 +14,23 @@ environment {
            
         }
 
+
 // stage2
   
-          stage('Build Docker') {
+          stage('dockerBuildAndPush')
+          {
             steps {
-                
-               sh(script: """
-                   
-               docker build -t algn48/docker-image4 .
-
-            """) 
-
-            }
+            dockerBuildAndPush( imageName: "${IMAGE_NAME}")
+                  }
             
           }
-// stage3
-    
 
-    stage('Login') {
-            steps {
-               sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-           
-        }
-        stage('Push image') {
-            steps {
-
-            
-               sh(script: """
-                
-            docker push algn48/docker-image4
-
-                
-
-                    """)    
-            }
         
-
-             }
-
-
-        stage('Logout') {
-            steps {
-                sh 'docker logout'
-            }
-           
-        }
-
-// stage5
-         stage('Run Trivy') {
-               steps {
-                  sleep(time: 30, unit: 'SECONDS')
-                  sh(script: """
-                  trivy image algn48/docker-image4
-                    
-                  """)
-               }
-            }
-    }
+   }
 }
 
 
-/*###############################################################33*/
+//###############################################################33
 /*pipeline {
     agent any
 
