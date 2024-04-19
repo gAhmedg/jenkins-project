@@ -7,7 +7,15 @@ environment {
     }
 
     agent any
-    stages {
+
+     stages {
+           stage('Verify Branch') {
+            steps {
+                echo "$GIT_BRANCH"
+            }
+        
+
+   
         stage('Build and Push Docker Image') {
             steps {
                 
