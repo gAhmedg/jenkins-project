@@ -1,4 +1,4 @@
-// @library("Shared-library") _
+@library("Shared-library") _
 pipeline {
     agent any
 
@@ -11,12 +11,12 @@ environment {
 
 
 // stage1 
-        // stage('Verify Branch') {
-        //     steps {
-        //         echo "$GIT_BRANCH"
-        //     }
+        stage('Verify Branch') {
+            steps {
+                echo "$GIT_BRANCH"
+            }
            
-        // }
+        }
 
 
 // stage2
