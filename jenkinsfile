@@ -1,0 +1,100 @@
+pipeline {
+    agent any
+
+   
+environment {
+    IMAGE_NAME      = 'algn48/new-app-nti' 
+}
+  // stage1
+    stages {    
+        stage('Verify Branch') {
+            steps {
+                echo "$GIT_BRANCH"
+            }
+           
+        }
+
+// stage2
+  
+          stage('Build Docker') {
+            steps {
+                
+               sh(script: """
+                   
+               docker build -t algn48/docker-image4 .
+
+            """) 
+
+            }
+            
+          }
+// stage3
+    
+
+    stage('Login') {
+            steps {
+               sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+           
+        }
+        stage('Push image') {
+            steps {
+
+            
+               sh(script: """
+                
+            docker push algn48/docker-image4
+
+                
+
+                    """)    
+            }
+        
+
+             }
+
+
+        stage('Logout') {
+            steps {
+                sh 'docker logout'
+            }
+           
+        }
+
+// stage5
+         stage('Run Trivy') {
+               steps {
+                  sleep(time: 30, unit: 'SECONDS')
+                  sh(script: """
+                  trivy image algn48/docker-image4
+                    
+                  """)
+               }
+            }
+    }
+}
+
+
+/*###############################################################33*/
+/*pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
+*/
