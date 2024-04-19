@@ -21,8 +21,8 @@ environment {
 	    withCredentials([usernamePassword(credentialsId: "${DOCKERHUB}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 		sh "docker login -u ${USERNAME} -p ${PASSWORD}"
         }
-            dockerBuildAndPush(  imageName: "${IMAGE}")
-                  }
+            sh "docker build -t ${IMAGE}:${BUILD_NUMBER} ."
+            sh "docker push ${IMAGE}:${BUILD_NUMBER}"	 
             
           }
 
