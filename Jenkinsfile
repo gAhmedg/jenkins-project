@@ -1,12 +1,17 @@
 @Library('shared-library') _
 
 pipeline {
+
+environment { 
+        image = algn48/nti-app
+    }
+
     agent any
     stages {
         stage('Build and Push Docker Image') {
             steps {
                 
-                oldDockerBuildAndPush(imageName: 'algn48/nti-app', DockerhubCredentials: 'DOCKERHUB')
+                oldDockerBuildAndPush(image: ${imageName}, DockerhubCredentials: 'DOCKERHUB')
             }
         }
     }
