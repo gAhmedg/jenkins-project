@@ -12,20 +12,16 @@ environment {
 
 
 // stage1 
-        stage('Verify Branch') {
-            steps {
-                echo "$GIT_BRANCH"
-            }
-           
-        }
-
-
-// stage2
   
           stage('dockerBuildAndPush')
           {
             steps {
-            dockerBuildAndPush( dockerHubCredentialsID: "${DOCKERHUB}", imageName: "${IMAGE}")
+
+    // Log in to DockerHub 
+	    withCredentials([usernamePassword(credentialsId: "${DOCKERHUB}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+		sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+        }
+            dockerBuildAndPush(  imageName: "${IMAGE}")
                   }
             
           }
