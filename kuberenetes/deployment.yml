@@ -15,7 +15,7 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: myapp-container
+      - name: myapp-python
         image: algn48/nti-app
         ports:
         - containerPort: 5000

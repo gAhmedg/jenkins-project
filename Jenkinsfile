@@ -9,18 +9,38 @@ environment {
     agent any
 
      stages {
-           stage('Verify Branch') {
-            steps {
-                echo "$GIT_BRANCH"
-            }
+        //    stage('Verify Branch') {
+        //     steps {
+        //         echo "$GIT_BRANCH"
+        //     }
         
 
    
-        stage('Build and Push Docker Image') {
-            steps {
+        // stage('Build and Push Docker Image') {
+        //     steps {
                 
-                oldDockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
+        //         oldDockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
+        //     }
+        // }
+    
+    
+    
+    stage('Deploy in kubernetes') {
+            steps {
+                sh '''
+                    cd kuberenetes/
+                    kubectl apply -f deployment.yml
+                    kubectl  apply -f services.yaml
+
+                '''
             }
         }
+    
+    
+    
+    
+    
+    
+    
     }
 }
