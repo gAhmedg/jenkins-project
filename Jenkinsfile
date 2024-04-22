@@ -1,9 +1,11 @@
-//@Library('shared-library') _
+@Library('shared-library') _
 
 pipeline {
 
 environment { 
         imageName = 'algsn48/nti-app'
+        kubernetscerdential    = 'KUBERNETES'
+        yamlfiles = 'kuberenetes/DeploymentAndServices.yml'
     }
 
     agent any
@@ -19,26 +21,17 @@ environment {
         // stage('Build and Push Docker Image') {
         //     steps {
                 
-        //         oldDockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
+        //         DockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
         //     }
         // }
     
     
     
     stage('Deploy in kubernetes') {
-            steps {
-                // sh '''
-                //     cd kuberenetes/
-                //     kubectl apply -f deployment.yml
-                //     kubectl  apply -f services.yaml
-
-                // '''
+            steps {                                     
 
                 
-
-                   // kubernetesDeploy( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
-                    kubernetesDeploy( configs: 'kuberenetes/serviceAccount.yaml', kubeconfigId: 'KUBERNETES' )
-                   //
+                    Deploykubenetes(pathofyamlfile: "${yamlfiles}", k8scerdential: "${kubernetscerdential}")
             }
         }
     
