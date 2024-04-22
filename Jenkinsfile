@@ -23,7 +23,7 @@ environment {
             steps {
                 
                script {
-                    test([ image: "${imageName}:${BUILD_NUMBER}", DockerCredentials: 'DOCKERHUB' ])
+                    buildPushtoHub([ image: "${imageName}:${BUILD_NUMBER}", DockerCredentials: 'DOCKERHUB' ])
                 } 
             }
         }
