@@ -6,7 +6,8 @@ environment {
         imageName = 'algn48/nti-app-python'
         kubernetscerdential    = 'KUBERNETES'
         yamlfiles = 'kuberenetes/DeploymentAndServices.yml'
-        
+                            
+
     }
 
     agent any
@@ -32,8 +33,8 @@ environment {
     
     stage('Deploy in kubernetes') {
             steps {                                     
-
-                    sh "sed -i 's|image:.*|image: ${imageName}:51 |g' ${yamlfiles} > python-app.yml"
+                   sh "sed 's|image:.*|image: ${imageName}:51|' ${yamlfiles} > python-app.yml"
+                    
                     Deploykubenetes(pathofyamlfile: "python-app.yml", k8scerdential: "${kubernetscerdential}")
             }
         }
