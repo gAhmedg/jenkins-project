@@ -33,7 +33,7 @@ environment {
     stage('Deploy in kubernetes') {
             steps {                                     
 
-                    sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER} |g' ${BUILD_NUMBER}:${yamlfiles}"
+                    sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER} |g' ${yamlfiles} > ${BUILD_NUMBER}:${yamlfiles}"
                     Deploykubenetes(pathofyamlfile: "${BUILD_NUMBER}:${yamlfiles}", k8scerdential: "${kubernetscerdential}")
             }
         }
