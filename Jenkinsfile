@@ -36,7 +36,8 @@ environment {
 
                 
 
-                   kubernetesDeploy configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' , sh' kubectl get  pods' 
+                   // kubernetesDeploy( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
+                    kubernetesDeploy( configs: 'kuberenetes/serviceAccount.yaml', kubeconfigId: 'KUBERNETES' )
                    //
             }
         }
