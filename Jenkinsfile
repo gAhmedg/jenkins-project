@@ -34,10 +34,11 @@ environment {
 
                 // '''
 
-                
+                 sh '''
 
                     kubernetesDeploy( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
-                    sh ' kubectl get  pods'
+                    kubectl get  pods
+                    '''
                 
             }
         }
