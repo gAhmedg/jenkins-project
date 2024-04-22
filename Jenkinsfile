@@ -22,7 +22,7 @@ environment {
             steps {
                 
                script {
-                    DockerBuildAndPush([ image: "${imageName}", DockerCredentials: 'DOCKERHUB' ])
+                    test([ image: "${imageName}", DockerCredentials: 'DOCKERHUB' ])
                 } 
             }
         }
