@@ -20,20 +20,20 @@ environment {
         
             }
    
-        // stage('Build and Push Docker Image') {
-        //     steps {
+        stage('Build and Push Docker Image') {
+            steps {
                 
-        //        script {
-        //             buildPushtoHub([ image: "${imageName}:${BUILD_NUMBER}", DockerCredentials: 'DOCKERHUB' ])
-        //         } 
-        //     }
-        // }
+               script {
+                    buildPushtoHub([ image: "${imageName}:${BUILD_NUMBER}", DockerCredentials: 'DOCKERHUB' ])
+                } 
+            }
+        }
     
     
     
     stage('Deploy in kubernetes') {
             steps {                                     
-                   sh "sed 's|image:.*|image: ${imageName}:51|' ${yamlfiles} > python-app.yml"
+                   sh "sed 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|' ${yamlfiles} > python-app.yml"
                     
                     Deploykubenetes(pathofyamlfile: "python-app.yml", k8scerdential: "${kubernetscerdential}")
             }
