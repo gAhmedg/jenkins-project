@@ -16,7 +16,7 @@ environment {
                 echo "$GIT_BRANCH"
             }
         
-
+            }
    
         stage('Build and Push Docker Image') {
             steps {
@@ -42,5 +42,4 @@ environment {
     
     
     }
-}
 }
