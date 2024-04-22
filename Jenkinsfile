@@ -11,19 +11,19 @@ environment {
     agent any
 
      stages {
-        //    stage('Verify Branch') {
-        //     steps {
-        //         echo "$GIT_BRANCH"
-        //     }
+            stage('Verify Branch') {
+            steps {
+                echo "$GIT_BRANCH"
+            }
         
 
    
-        // stage('Build and Push Docker Image') {
-        //     steps {
+        stage('Build and Push Docker Image') {
+            steps {
                 
-        //         DockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
-        //     }
-        // }
+                DockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
+            }
+        }
     
     
     
@@ -42,4 +42,5 @@ environment {
     
     
     }
+}
 }
