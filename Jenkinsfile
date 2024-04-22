@@ -23,7 +23,7 @@ environment {
             steps {
                 
                script {
-                    test([ image: "${imageName}", DockerCredentials: 'DOCKERHUB' ])
+                    test([ image: "${imageName}:${BUILD_NUMBER}", DockerCredentials: 'DOCKERHUB' ])
                 } 
             }
         }
@@ -33,8 +33,8 @@ environment {
     stage('Deploy in kubernetes') {
             steps {                                     
 
-                
-                    Deploykubenetes(pathofyamlfile: "${yamlfiles}", k8scerdential: "${kubernetscerdential}")
+                    sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER} |g' ${BUILD_NUMBER}:${yamlfiles}"
+                    Deploykubenetes(pathofyamlfile: "${BUILD_NUMBER}:${yamlfiles}", k8scerdential: "${kubernetscerdential}")
             }
         }
     
