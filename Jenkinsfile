@@ -21,7 +21,7 @@ environment {
         stage('Build and Push Docker Image') {
             steps {
                 
-                DockerBuildAndPush(image: "${imageName}", DockerhubCredentials: 'DOCKERHUB')
+                DockerBuildAndPush(image: "${imageName}", DockerCredentials: "DOCKERHUB")
             }
         }
     
