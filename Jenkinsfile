@@ -6,7 +6,7 @@ environment {
         imageName = 'algn48/nti-app'
         kubernetscerdential    = 'KUBERNETES'
         yamlfiles = 'kuberenetes/DeploymentAndServices.yml'
-        docker-credentials    = 'DOCKERHUB'
+        
     }
 
     agent any
@@ -23,7 +23,7 @@ environment {
             steps {
                 
                script {
-                    test([ image: "${imageName}", DockerCredentials: "${docker-credentials}" ])
+                    test([ image: "${imageName}", DockerCredentials: 'DOCKERHUB' ])
                 } 
             }
         }
