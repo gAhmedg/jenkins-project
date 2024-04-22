@@ -3,7 +3,7 @@
 pipeline {
 
 environment { 
-        imageName = 'algn48/nti-app'
+        imageName = 'algn48/nti-app-python'
         kubernetscerdential    = 'KUBERNETES'
         yamlfiles = 'kuberenetes/DeploymentAndServices.yml'
         
