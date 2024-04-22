@@ -3,7 +3,7 @@
 pipeline {
 
 environment { 
-        imageName = 'algn48/nti-app'
+        imageName = 'algsn48/nti-app'
     }
 
     agent any
@@ -37,6 +37,7 @@ environment {
                 script {
 
                     kubernetesDeploy ( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
+                    sh 'kubectl get all'
                 }
             }
         }
