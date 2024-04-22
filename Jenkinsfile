@@ -27,12 +27,17 @@ environment {
     
     stage('Deploy in kubernetes') {
             steps {
-                sh '''
-                    cd kuberenetes/
-                    kubectl apply -f deployment.yml
-                    kubectl  apply -f services.yaml
+                // sh '''
+                //     cd kuberenetes/
+                //     kubectl apply -f deployment.yml
+                //     kubectl  apply -f services.yaml
 
-                '''
+                // '''
+
+                script {
+
+                    kubernetesDeploy ( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
+                }
             }
         }
     
