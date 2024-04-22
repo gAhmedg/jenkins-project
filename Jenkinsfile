@@ -34,11 +34,11 @@ environment {
 
                 // '''
 
-                script {
+                
 
-                    kubernetesDeploy{( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
-                    sh ' kubectl get all'}
-                }
+                    kubernetesDeploy( configs: 'kuberenetes/deployment.yml', kubeconfigId: 'KUBERNETES' )
+                    sh ' kubectl get all'
+                
             }
         }
     
