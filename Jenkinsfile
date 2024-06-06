@@ -4,7 +4,6 @@ pipeline {
 
 environment { 
         imageName = 'algn48/nti-app-python'
-        kubernetscerdential    = 'KUBERNETES'
         yamlfiles = 'kuberenetes/DeploymentAndServices.yml'
                             
 
@@ -12,7 +11,7 @@ environment {
 
     agent any
 
-     stages { 
+     stages {
             stage('Verify Branch') {
             steps {
                 echo "$GIT_BRANCH"
@@ -33,10 +32,14 @@ environment {
     
     stage('Deploy in kubernetes') {
             steps {                                     
-                   sh "sed 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|' ${yamlfiles} > python-app.yml"
-                    
-                    Deploykubenetes(pathofyamlfile: "python-app.yml", k8scerdential: "${kubernetscerdential}")
+                   
+
+            withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: '', contextName: '', credentialsId: '4', namespace: 'ahmedgomaa', serverUrl: 'https://api.ocp-training.ivolve-test.com:6443']]) {    
+                sh "sed 's|image:.*|image: ${imageName}:${BUILD_NUMBER}|' ${yamlfiles} > python-app.yml"
+                 sh 'kubectl apply -f python-app.yml -n ahmedgomaa'
+                 
             }
+        }
         }
     
     
