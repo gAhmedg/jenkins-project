@@ -45,10 +45,21 @@ environment {
         }
     
     
-    
-    
-    
-    
-    
+}
+
+ post {
+        success {
+            script {
+                echo 'Docker image build ,push and Deploy succeeded '
+                
+            }
+        }
+        failure {
+            script {
+                echo 'Docker image build ,push and Deploy failed'
+               
+            }
+        }
     }
+
 }
